@@ -42,7 +42,7 @@ def attack(predictWrapper, x_train, x_test, y_train, y_test, input_shape, datapo
     # Generate adversarial test examples
     s = time.time()
 
-    attacker = HopSkipJump(classifier=classifier, targeted=False, norm=2, max_iter=100, max_eval=10000, init_eval=100, init_size=100)
+    attacker = HopSkipJump(classifier=classifier, targeted=False, norm=2, max_iter=100, max_eval=10000, init_eval=100, init_size=1000)
     # attacker = HopSkipJump(classifier=classifier, targeted=False, norm=2, max_iter=2, max_eval=10000, init_eval=100, init_size=100)
 
 

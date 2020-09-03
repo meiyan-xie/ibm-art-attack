@@ -44,13 +44,13 @@ def loadData(datatype):
 def main():
 
     # Define variable
-    datatype = 'gtsrb_binary'
-    modelpath = '../binary/checkpoints/gtsrb_binary_scd01mlp_32_h20_br02_nr025_ni1000_i1.pkl'
+    datatype = 'cifar10'
+    modelpath = '../binary/checkpoints/cifar10_scd01mlp_100_br02_h20_nr075_ni1_i1_0.pkl'
 
     print('------------- model -------------\n', modelpath)
 
     # Define which data sample to be processed
-    data_idx = 4
+    data_idx = 0
     print('---------------data point---------------\n', data_idx)
 
     # Load data
@@ -61,11 +61,13 @@ def main():
         model = pickle.load(f)
 
     # Predict
-    pred_y = model.predict(x_test, cuda=False)
-    print('pred_y: ', pred_y[0], pred_y[1], pred_y[2], pred_y[3], pred_y[4], pred_y[5], pred_y[6])
-    print('y_test: ', y_test[0], y_test[1], y_test[2], y_test[3], y_test[4], y_test[5], y_test[6])
-    print('\npred_y: ', pred_y[-1], pred_y[-2], pred_y[-3], pred_y[-4], pred_y[-5], pred_y[-6])
-    print('y_test: ', y_test[-1], y_test[-2], y_test[-3], y_test[-4], y_test[-5], y_test[-6])
+    pred_y = model.predict(x_test, cuda=False).astype(int)
+    print('pred_y[0:7]: ', pred_y[0], pred_y[1], pred_y[2], pred_y[3], pred_y[4], pred_y[5], pred_y[6])
+    print('y_test[0:7]: ', y_test[0], y_test[1], y_test[2], y_test[3], y_test[4], y_test[5], y_test[6])
+    print('\npred_y[-1:-7]: ', pred_y[-1], pred_y[-2], pred_y[-3], pred_y[-4], pred_y[-5], pred_y[-6])
+    print('y_test[-1:-7]: ', y_test[-1], y_test[-2], y_test[-3], y_test[-4], y_test[-5], y_test[-6])
+    print('pred_y[{}]: '.format(data_idx), pred_y[data_idx])
+    print('y_test[{}]: '.format(data_idx), y_test[data_idx])
     print('Accuracy: ', accuracy_score(y_true=y_test, y_pred=pred_y))
 
 
@@ -73,7 +75,7 @@ def main():
     predictWrapper = modelWrapper(model)
     adv_data = hopskipjump.attack(predictWrapper, x_train, x_test, y_train, y_test, input_shape, x_test[data_idx])
 
-    print('adv_data predict: ', model.predict(adv_data))
+    print('adv_data predict: ', model.predict(adv_data, cuda=False))
 
 
 main()

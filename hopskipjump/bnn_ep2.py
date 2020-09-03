@@ -29,13 +29,13 @@ class modelWrapper():
 
 def loadData(datatype):
 
-    if datatype is 'gtsrb_binary':
+    if datatype == 'gtsrb_binary':
         x_train, x_test, y_train, y_test = load_data('gtsrb_binary', 2)
         input_shape = 3*48*48
-    elif datatype is 'cifar10_binary':
+    elif datatype == 'cifar10_binary':
         x_train, x_test, y_train, y_test = load_data('cifar10_binary', 2)
         input_shape = 3*32*32
-    elif datatype is 'cifar10':
+    elif datatype == 'cifar10':
         x_train, x_test, y_train, y_test = load_data('cifar10', 2)
         input_shape = 3*32*32
 
@@ -46,10 +46,12 @@ def main():
 
     # Define variable
     datatype = 'gtsrb_binary'
-    model = BNN(['../binary/checkpoints/gtsrb_binary_mlpbnn_approx_%d.h5' % (i) for i in range(100)])
+    model = BNN(['../binary/checkpoints/gtsrb_binary_mlpbnn_approx_ep2_%d.h5' % (i) for i in range(100)])
+
+    print('------------- model -------------\n', 'gtsrb_binary_mlpbnn_approx_ep2')
 
     # Define which data sample to be processed
-    data_idx = 6
+    data_idx = 0
     print('---------------data point---------------\n', data_idx)
 
     # Load data
@@ -66,7 +68,8 @@ def main():
 
     # Create a model wrapper
     predictWrapper = modelWrapper(model)
-    hopskipjump.attack(predictWrapper, x_train, x_test, y_train, y_test, input_shape, x_test[data_idx])
+    adv_data = hopskipjump.attack(predictWrapper, x_train, x_test, y_train, y_test, input_shape, x_test[data_idx])
 
+    print('adv_data predict: ', model.predict(adv_data))
 
 main()
