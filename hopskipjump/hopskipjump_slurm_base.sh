@@ -2,9 +2,9 @@
 # NOTE the -l (login) flag!
 
 # Set a job name
-#SBATCH --job-name=mlp01_100vote
-#SBATCH --output=mlp01_100vote/mlp01_{}.out
-#SBATCH --error=mlp01_100vote/mlp01_{}.err
+#SBATCH --job-name=rf
+#SBATCH --output=rf/rf_{}.out
+#SBATCH --error=rf/rf_{}.err
 # Default in slurm
 
 # Specify GPU queue
@@ -19,4 +19,4 @@
 # module load cuda/10.2.89
 # module load python/3.8
 
-python3 -u mlp01_cifar10.py
+python3 -u rf_celeba.py
