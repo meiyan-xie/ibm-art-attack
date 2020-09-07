@@ -7,7 +7,7 @@ from sklearn.metrics import accuracy_score
 from art.attacks.evasion import HopSkipJump
 from art.classifiers import BlackBoxClassifier
 
-import hopskipjump_simclr as hopskipjump
+import hopskipjump
 import utils
 
 sys.path.append('..')
@@ -45,15 +45,16 @@ def main():
 
     # Define variable
     datatype = 'cifar10'
-    modelpath = '../binary/checkpoints/cifar10_scd01mlp_100_br02_h20_nr075_ni1_i1_0.pkl'
+    modelpath = '../binary/checkpoints/cifar10_100_nr075_mlp1_sign_logistic_1000_w1_h1_005005.pkl'
 
     print('------------- model -------------\n', modelpath)
+
+    print('cross entropy loss')
 
     # Define which data sample to be processed
     data_idx = 0
     print('---------------data point---------------\n', data_idx)
 
-    print('init_size=1000')
 
     # Load data
     x_train, x_test, y_train, y_test, input_shape = loadData(datatype)

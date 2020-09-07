@@ -7,7 +7,7 @@ from sklearn.metrics import accuracy_score
 from art.attacks.evasion import HopSkipJump
 from art.classifiers import BlackBoxClassifier
 
-import hopskipjump
+import hopskipjump_simclr as hopskipjump
 import utils
 
 sys.path.append('..')
@@ -20,7 +20,6 @@ class modelWrapper():
         self.model = model
 
     def predict_one_hot(self, x_test):
-
         pred_y = self.model.predict(x_test, cuda=False)
         pred_one_hot = np.eye(2)[pred_y.astype(int)]
 
@@ -38,9 +37,6 @@ def loadData(datatype):
     elif datatype == 'cifar10':
         x_train, x_test, y_train, y_test = load_data('cifar10', 2)
         input_shape = 3*32*32
-    elif datatype == 'imagenet':
-        x_train, x_test, y_train, y_test = load_data('imagenet', 2)
-        input_shape = 3*224*224
 
     return x_train, x_test, y_train, y_test, input_shape
 
@@ -48,14 +44,16 @@ def loadData(datatype):
 def main():
 
     # Define variable
-    datatype = 'imagenet'
-    modelpath = '../binary/checkpoints/imagenet_scd01mlp_100_br02_h20_nr075_ni1000_i1_0.pkl'
+    datatype = 'cifar10_binary'
+    modelpath = '../binary/checkpoints/cifar10_binary_scd01mlp_100_br02_h500_nr075_ni25000_i1.pkl'
 
     print('------------- model -------------\n', modelpath)
 
+
     # Define which data sample to be processed
-    data_idx = 900
+    data_idx = 1000
     print('---------------data point---------------\n', data_idx)
+
 
     # Load data
     x_train, x_test, y_train, y_test, input_shape = loadData(datatype)
@@ -63,7 +61,6 @@ def main():
     # Load model
     with open(modelpath, 'rb') as f:
         model = pickle.load(f)
-
 
     # Predict
     pred_y = model.predict(x_test, cuda=False).astype(int)

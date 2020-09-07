@@ -52,7 +52,7 @@ def main():
     datatype = 'imagenet'
     model = BNN(['../binary/checkpoints/imagenet_mlpbnn_approx_%d.h5' % (i) for i in range(100)])
 
-    print('------------- model -------------\n', 'imagenet_mlpbnn_approx_')
+    print('------------- model -------------\n', 'imagenet_mlpbnn_approx')
 
     # Define which data sample to be processed
     data_idx = 900
