@@ -34,12 +34,9 @@ def loadData(datatype):
     elif datatype == 'cifar10_binary':
         x_train, x_test, y_train, y_test = load_data('cifar10_binary', 2)
         input_shape = 3*32*32
-    elif datatype == 'cifar10':
-        x_train, x_test, y_train, y_test = load_data('cifar10', 2)
-        input_shape = 3*32*32
-    elif datatype == 'celeba':
-        x_train, x_test, y_train, y_test = load_data('celeba', 2)
-        input_shape = 3*96*96
+    elif datatype == 'imagenet':
+        x_train, x_test, y_train, y_test = load_data('imagenet', 2)
+        input_shape = 3*224*224
 
     return x_train, x_test, y_train, y_test, input_shape
 
@@ -47,14 +44,16 @@ def loadData(datatype):
 def main():
 
     # Define variable
-    datatype = 'celeba'
-    modelpath = '../binary/checkpoints/celeba_scd01mlpbnn_100_br02_h20_nr075_ni10000_i1_0.pkl'
+    datatype = 'imagenet'
+    modelpath = '../binary/checkpoints/imagenet_scdcemlpbnn_100_br02_h20_nr075_ni10000_i1_0.pkl'
 
     print('------------- model -------------\n', modelpath)
 
+
     # Define which data sample to be processed
-    data_idx = 800
+    data_idx = 900
     print('---------------data point---------------\n', data_idx)
+
 
     # Load data
     x_train, x_test, y_train, y_test, input_shape = loadData(datatype)

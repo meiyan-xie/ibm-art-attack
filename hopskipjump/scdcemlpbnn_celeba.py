@@ -48,7 +48,7 @@ def main():
 
     # Define variable
     datatype = 'celeba'
-    modelpath = '../binary/checkpoints/celeba_scd01mlpbnn_100_br02_h20_nr075_ni10000_i1_0.pkl'
+    modelpath = '../binary/checkpoints/celeba_scdcemlpbnn_100_br02_h20_nr075_ni10000_i1_0.pkl'
 
     print('------------- model -------------\n', modelpath)
 

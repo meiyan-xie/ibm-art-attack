@@ -49,7 +49,7 @@ def main():
 
     # Define variable
     datatype = 'imagenet'
-    modelpath = '../binary/checkpoints/imagenet_scd01mlp_100_br02_h20_nr075_ni1000_i1_0.pkl'
+    modelpath = '../binary/checkpoints/imagenet_scd01mlpbnn_100_br02_h20_nr075_ni10000_i1_0.pkl'
 
     print('------------- model -------------\n', modelpath)
 

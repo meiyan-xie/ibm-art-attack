@@ -45,11 +45,10 @@ def main():
 
     # Define variable
     datatype = 'cifar10'
-    modelpath = '../binary/checkpoints/cifar10_100_nr075_mlp1_sign_logistic_1000_w1_h1_005005.pkl'
+    modelpath = '../binary/checkpoints/cifar10_scd01mlpbnn_100_br02_h20_nr075_ni10000_i1_0.pkl'
 
     print('------------- model -------------\n', modelpath)
 
-    print('cross entropy loss')
 
     # Define which data sample to be processed
     data_idx = 0

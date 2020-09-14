@@ -45,12 +45,12 @@ def main():
 
     # Define variable
     datatype = 'gtsrb_binary'
-    modelpath = '../binary/checkpoints/gtsrb_binary_scd01mlp_32_h20_br02_nr025_ni1000_i1.pkl'
+    modelpath = '../binary/checkpoints/gtsrb_binary_scd01mlpbnn_100_br02_h20_nr075_ni10000_i1_0.pkl'
 
     print('------------- model -------------\n', modelpath)
 
     # Define which data sample to be processed
-    data_idx = 4
+    data_idx = 0
     print('---------------data point---------------\n', data_idx)
 
     # Load data
@@ -66,6 +66,8 @@ def main():
     print('y_test: ', y_test[0], y_test[1], y_test[2], y_test[3], y_test[4], y_test[5], y_test[6])
     print('\npred_y: ', pred_y[-1], pred_y[-2], pred_y[-3], pred_y[-4], pred_y[-5], pred_y[-6])
     print('y_test: ', y_test[-1], y_test[-2], y_test[-3], y_test[-4], y_test[-5], y_test[-6])
+    print('pred_y[{}]: '.format(data_idx), pred_y[data_idx])
+    print('y_test[{}]: '.format(data_idx), y_test[data_idx])
     print('Accuracy: ', accuracy_score(y_true=y_test, y_pred=pred_y))
 
 

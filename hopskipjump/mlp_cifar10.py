@@ -45,7 +45,7 @@ def main():
 
     # Define variable
     datatype = 'cifar10'
-    modelpath = '../binary/checkpoints/cifar10_100_nr075_mlp1_sign_logistic_1000_w1_h1.pkl'
+    modelpath = '../binary/checkpoints/cifar10_100_nr075_mlp1_sign_01loss_1000_w1_h1_w005005.pkl'
 
     print('------------- model -------------\n', modelpath)
 

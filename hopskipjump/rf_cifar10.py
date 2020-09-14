@@ -45,12 +45,12 @@ def main():
 
     # Define variable
     datatype = 'cifar10'
-    modelpath = '../binary/checkpoints/cifar10_rf_100.pkl'
+    modelpath = '../binary/checkpoints/cifar10_rf_256.pkl'
 
     print('------------- model -------------\n', modelpath)
 
     # Define which data sample to be processed
-    data_idx = 1991
+    data_idx = 0
     print('---------------data point---------------\n', data_idx)
 
     # Load data

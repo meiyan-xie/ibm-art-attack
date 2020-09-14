@@ -37,9 +37,6 @@ def loadData(datatype):
     elif datatype == 'cifar10':
         x_train, x_test, y_train, y_test = load_data('cifar10', 2)
         input_shape = 3*32*32
-    elif datatype == 'celeba':
-        x_train, x_test, y_train, y_test = load_data('celeba', 2)
-        input_shape = 3*96*96
 
     return x_train, x_test, y_train, y_test, input_shape
 
@@ -47,14 +44,16 @@ def loadData(datatype):
 def main():
 
     # Define variable
-    datatype = 'celeba'
-    modelpath = '../binary/checkpoints/celeba_scd01mlpbnn_100_br02_h20_nr075_ni10000_i1_0.pkl'
+    datatype = 'cifar10'
+    modelpath = '../binary/checkpoints/cifar10_scdcemlpbnn_100_br02_h20_nr075_ni10000_i1_0.pkl'
 
     print('------------- model -------------\n', modelpath)
 
+
     # Define which data sample to be processed
-    data_idx = 800
+    data_idx = 0
     print('---------------data point---------------\n', data_idx)
+
 
     # Load data
     x_train, x_test, y_train, y_test, input_shape = loadData(datatype)
@@ -62,6 +61,9 @@ def main():
     # Load model
     with open(modelpath, 'rb') as f:
         model = pickle.load(f)
+
+    # model.round=1
+    # print('number of vote: ', model.round)
 
     # Predict
     pred_y = model.predict(x_test, cuda=False).astype(int)
