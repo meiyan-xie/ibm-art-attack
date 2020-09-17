@@ -72,7 +72,7 @@ def main():
     adv_lst = []
 
     # Predict
-    for vote in range(100):
+    for vote in range(10):
         print('\n\nVote id: {}\n'.format(vote))
         pred_y = model.predict(x_test, best_index=vote).astype(int)
 
