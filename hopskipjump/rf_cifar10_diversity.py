@@ -21,7 +21,8 @@ class modelWrapper():
         self.vote = vote
 
     def predict_one_hot(self, x_test):
-        pred_y = self.model.estimators_[self.vote].predict(x_test)
+        # print(x_test)
+        pred_y = self.model.estimators_[self.vote].predict(x_test).astype(int)
         pred_one_hot = np.eye(2)[pred_y.astype(int)]
 
         return pred_one_hot
@@ -51,7 +52,7 @@ def main():
     print('------------- model -------------\n', modelpath)
 
     # Define which data sample to be processed
-    data_idx = 0
+    data_idx = 288
     print('---------------data point---------------\n', data_idx)
 
     # Load data
@@ -64,9 +65,10 @@ def main():
     adv_lst = []
 
     # Predict
-    for vote in range(100):
+    for vote in range(51):
+
         print('\n\nVote id: {}\n'.format(vote))
-        pred_y = model.estimators_[vote].predict(x_test)
+        pred_y = model.estimators_[vote].predict(x_test).astype(int)
 
         print('pred_y[{}]: '.format(data_idx), pred_y[data_idx])
         print('y_test[{}]: '.format(data_idx), y_test[data_idx])
@@ -80,10 +82,29 @@ def main():
 
         print('adv_data predict: ', model.estimators_[vote].predict(adv_data))
 
+    # Predict
+    for vote in range(52, 100):
+
+        print('\n\nVote id: {}\n'.format(vote))
+        pred_y = model.estimators_[vote].predict(x_test).astype(int)
+
+        print('pred_y[{}]: '.format(data_idx), pred_y[data_idx])
+        print('y_test[{}]: '.format(data_idx), y_test[data_idx])
+        print('Accuracy: ', accuracy_score(y_true=y_test, y_pred=pred_y))
+
+        # Create a model wrapper
+        predictWrapper = modelWrapper(model, vote)
+        adv_data = hopskipjump.attack(predictWrapper, x_train, x_test, y_train, y_test, input_shape, x_test[data_idx])
+
+        adv_lst.append(adv_data)
+
+        print('adv_data predict: ', model.estimators_[vote].predict(adv_data))
+
+
     adv = np.array(adv_lst)
     print('shape', adv.shape)
     adv = np.squeeze(adv, axis=1)
     print('shape', adv.shape)
-    np.save('rf_adv_data', adv)
+    np.save('rf_adv_data_288', adv)
 
 main()

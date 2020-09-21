@@ -16,18 +16,12 @@ from tools import args, save_checkpoint, print_title, load_data
 
 
 class modelWrapper():
-    def __init__(self, model, datatype, vote):
+    def __init__(self, model, vote):
         self.model = model
-        self.datatype = datatype
         self.vote = vote
 
     def predict_one_hot(self, x_test):
-        if self.datatype == 'gtsrb_binary':
-            x_test = x_test.reshape(-1, 3, 48, 48)
-        elif self.datatype == 'cifar10':
-            x_test = x_test.reshape(-1, 3, 32, 32)
-
-        pred_y = self.model.predict(x_test, best_index=self.vote)
+        pred_y = self.model.predict(x_test, cuda=False, kind='best', best_index=self.vote)
         pred_one_hot = np.eye(2)[pred_y.astype(int)]
 
         return pred_one_hot
@@ -43,8 +37,6 @@ def loadData(datatype):
         input_shape = 3*32*32
     elif datatype == 'cifar10':
         x_train, x_test, y_train, y_test = load_data('cifar10', 2)
-        x_train = x_train.reshape((-1, 32, 32, 3)).transpose((0, 3, 1, 2)).astype(np.float32)
-        x_test = x_test.reshape((-1, 32, 32, 3)).transpose((0, 3, 1, 2)).astype(np.float32)
         input_shape = 3*32*32
 
     return x_train, x_test, y_train, y_test, input_shape
@@ -54,13 +46,15 @@ def main():
 
     # Define variable
     datatype = 'cifar10'
-    modelpath = '../binary/checkpoints/cifar10_resnet50_10.pkl'
+    modelpath = '../binary/checkpoints/cifar10_scdcemlp_100_br02_h20_nr075_ni1000_i1_0.pkl'
 
     print('------------- model -------------\n', modelpath)
 
+
     # Define which data sample to be processed
-    data_idx = 0
+    data_idx = 288
     print('---------------data point---------------\n', data_idx)
+
 
     # Load data
     x_train, x_test, y_train, y_test, input_shape = loadData(datatype)
@@ -72,31 +66,28 @@ def main():
     adv_lst = []
 
     # Predict
-    for vote in range(10):
+    for vote in range(100):
         print('\n\nVote id: {}\n'.format(vote))
-        pred_y = model.predict(x_test, best_index=vote).astype(int)
+        pred_y = model.predict(x_test, cuda=False, kind='best', best_index=vote).astype(int)
 
         print('pred_y[{}]: '.format(data_idx), pred_y[data_idx])
         print('y_test[{}]: '.format(data_idx), y_test[data_idx])
         print('Accuracy: ', accuracy_score(y_true=y_test, y_pred=pred_y))
 
+
         # Create a model wrapper
-        predictWrapper = modelWrapper(model, datatype, vote)
+        predictWrapper = modelWrapper(model, vote)
         adv_data = hopskipjump.attack(predictWrapper, x_train, x_test, y_train, y_test, input_shape, x_test[data_idx])
 
         adv_lst.append(adv_data)
 
-        if datatype == 'gtsrb_binary':
-            adv_data = adv_data.reshape(-1, 3, 48, 48)
-        elif datatype == 'cifar10':
-            adv_data = adv_data.reshape(-1, 3, 32, 32)
-        print('adv_data predict: ', model.predict(adv_data, best_index=vote))
+        print('adv_data predict: ', model.predict(adv_data, cuda=False, kind='best', best_index=vote))
 
     adv = np.array(adv_lst)
     print('shape', adv.shape)
     adv = np.squeeze(adv, axis=1)
     print('shape', adv.shape)
-    np.save('resnet_adv_data', adv)
+    np.save('scdcemlp_adv_data_288', adv)
 
 
 main()

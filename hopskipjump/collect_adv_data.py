@@ -1,15 +1,16 @@
 import numpy as np
 
 
-bnn_adv_data = []
+def concat_adv_resnet():
+    path = 'resnet_adv_data_288/'
+    adv_data = []
+    adv_path = [path + 'resnet_adv_data_%d.npy' % i for i in range(10)]
+    for i in range(10):
+        adv_data.append(np.load(adv_path[i]))
 
-for i in range(100):
-    adv = np.load('bnn_adv_data/bnn_adv_data_{}.npy'.format(i))
-    print(adv.shape)
+    adv_data = np.concatenate(adv_data, axis=0)
+    print(adv_data.shape)
+    np.save('resnet_adv_data_288', adv_data)
 
-    bnn_adv_data.append(adv)
 
-bnn_adv_data = np.array(bnn_adv_data)
-bnn_adv_data = np.squeeze(bnn_adv_data, axis=1)
-print(bnn_adv_data.shape)
-np.save('bnn_adv_data', bnn_adv_data)
+concat_adv_resnet()

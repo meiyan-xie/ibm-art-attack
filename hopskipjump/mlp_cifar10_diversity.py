@@ -51,7 +51,7 @@ def main():
     print('------------- model -------------\n', modelpath)
 
     # Define which data sample to be processed
-    data_idx = 0
+    data_idx = 288
     print('---------------data point---------------\n', data_idx)
 
 
@@ -85,7 +85,7 @@ def main():
     print('shape', adv.shape)
     adv = np.squeeze(adv, axis=1)
     print('shape', adv.shape)
-    np.save('mlp_adv_data', adv)
+    np.save('mlp_adv_data_288', adv)
 
 
 main()

@@ -7,7 +7,7 @@ from sklearn.metrics import accuracy_score
 from art.attacks.evasion import HopSkipJump
 from art.classifiers import BlackBoxClassifier
 
-import hopskipjump_simclr as hopskipjump
+import hopskipjump
 import utils
 
 sys.path.append('..')
@@ -44,14 +44,14 @@ def loadData(datatype):
 def main():
 
     # Define variable
-    datatype = 'cifar10_binary'
-    modelpath = '../binary/checkpoints/cifar10_binary_scd01mlp_100_br02_h500_nr075_ni25000_i1.pkl'
+    datatype = 'cifar10'
+    modelpath = '../binary/checkpoints/cifar10_scdcemlp_100_br02_h20_nr075_ni1000_i1_0.pkl'
 
     print('------------- model -------------\n', modelpath)
 
 
     # Define which data sample to be processed
-    data_idx = 1000
+    data_idx = 1991
     print('---------------data point---------------\n', data_idx)
 
 

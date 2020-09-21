@@ -51,7 +51,7 @@ def main():
 
 
     # Define which data sample to be processed
-    data_idx = 0
+    data_idx = 1991
     print('---------------data point---------------\n', data_idx)
 
 
