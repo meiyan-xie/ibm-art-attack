@@ -64,7 +64,7 @@ def main():
     print('------------- model -------------\n', modelpath)
 
     # Define which data sample to be processed
-    data_idx = 1800
+    data_idx = 0
     print('---------------data point---------------\n', data_idx)
 
     # Load data

@@ -2,9 +2,9 @@
 # NOTE the -l (login) flag!
 
 # Set a job name
-#SBATCH --job-name=bnn
-#SBATCH --output=bnn/bnn_800_{}.out
-#SBATCH --error=bnn/bnn_800_{}.err
+#SBATCH --job-name=lenet0
+#SBATCH --output=lenet_100votes/lenet_0_{}.out
+#SBATCH --error=lenet_100votes/lenet_0_{}.err
 # Default in slurm
 
 # Specify GPU queue
@@ -19,4 +19,4 @@
 # module load cuda/10.2.89
 # module load python/3.8
 
-python3 -u bnn_cifar10_800.py
+python3 -u lenet_cifar10_0.py
