@@ -52,7 +52,7 @@ def main():
     print('------------- model -------------\n', 'cifar10_mlpbnn_approx')
 
     # Define which data sample to be processed
-    data_idx = 0
+    data_idx = 1991
     print('---------------data point---------------\n', data_idx)
 
     # Load data

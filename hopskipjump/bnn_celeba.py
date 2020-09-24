@@ -55,7 +55,7 @@ def main():
     print('------------- model -------------\n', 'celeba_mlpbnn_approx')
 
     # Define which data sample to be processed
-    data_idx = 800
+    data_idx = 1800
     print('---------------data point---------------\n', data_idx)
 
     # Load data
