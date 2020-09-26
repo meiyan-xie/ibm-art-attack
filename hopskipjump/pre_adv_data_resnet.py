@@ -19,7 +19,7 @@ def main():
         modelpath = '../binary/checkpoints/cifar10_resnet50_10_{}.pkl'.format(group)
         print('\n------------- model -------------\n', modelpath)
 
-        adv_data = np.load('resnet_adv_data_288.npy')
+        adv_data = np.load('resnet_adv_data_6.npy')
         print('adv shape', adv_data.shape)
         adv_data = adv_data.reshape(-1, 3, 32, 32)
         print('adv shape', adv_data.shape)

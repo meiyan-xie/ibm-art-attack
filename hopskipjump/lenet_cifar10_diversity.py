@@ -25,7 +25,7 @@ class modelWrapper():
 
         if self.datatype == 'gtsrb_binary':
             x_test = x_test.reshape(-1, 3, 48, 48)
-        elif self.datatype == 'cifar10_binary': # class 6, 8
+        elif self.datatype == 'cifar10_binary': # class 5, 8
             x_test = x_test.reshape(-1, 3, 32, 32)
         elif self.datatype == 'cifar10':
             x_test = x_test.reshape(-1, 3, 32, 32)
@@ -65,7 +65,7 @@ def main():
     print('------------- model -------------\n', modelpath)
 
     # Define which data sample to be processed
-    data_idx = 0
+    data_idx = 5
     print('---------------data point---------------\n', data_idx)
 
     # Load data
@@ -101,7 +101,7 @@ def main():
     print('shape', adv.shape)
     adv = np.squeeze(adv, axis=1)
     print('shape', adv.shape)
-    np.save('lenet_adv_data_0', adv)
+    np.save('lenet_adv_data_5', adv)
 
 
 main()

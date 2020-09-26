@@ -52,7 +52,7 @@ def main():
 
 
     # Define which data sample to be processed
-    data_idx = 288
+    data_idx = 5
     print('\n---------------data point---------------\n', data_idx)
 
 
@@ -89,6 +89,6 @@ def main():
     print('shape', adv.shape)
     adv = np.squeeze(adv, axis=1)
     print('shape', adv.shape)
-    np.save('scdcemlp_bnn_adv_data_288', adv)
+    np.save('scdcemlp_bnn_adv_data_5', adv)
 
 main()

@@ -52,7 +52,7 @@ def main():
     print('------------- model -------------\n', modelpath)
 
     # Define which data sample to be processed
-    data_idx = 288
+    data_idx = 5
     print('---------------data point---------------\n', data_idx)
 
     # Load data
@@ -65,25 +65,7 @@ def main():
     adv_lst = []
 
     # Predict
-    for vote in range(51):
-
-        print('\n\nVote id: {}\n'.format(vote))
-        pred_y = model.estimators_[vote].predict(x_test).astype(int)
-
-        print('pred_y[{}]: '.format(data_idx), pred_y[data_idx])
-        print('y_test[{}]: '.format(data_idx), y_test[data_idx])
-        print('Accuracy: ', accuracy_score(y_true=y_test, y_pred=pred_y))
-
-        # Create a model wrapper
-        predictWrapper = modelWrapper(model, vote)
-        adv_data = hopskipjump.attack(predictWrapper, x_train, x_test, y_train, y_test, input_shape, x_test[data_idx])
-
-        adv_lst.append(adv_data)
-
-        print('adv_data predict: ', model.estimators_[vote].predict(adv_data))
-
-    # Predict
-    for vote in range(52, 100):
+    for vote in range(100):
 
         print('\n\nVote id: {}\n'.format(vote))
         pred_y = model.estimators_[vote].predict(x_test).astype(int)
@@ -105,6 +87,6 @@ def main():
     print('shape', adv.shape)
     adv = np.squeeze(adv, axis=1)
     print('shape', adv.shape)
-    np.save('rf_adv_data_288', adv)
+    np.save('rf_adv_data_5', adv)
 
 main()

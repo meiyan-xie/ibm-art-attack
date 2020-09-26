@@ -45,13 +45,14 @@ def main():
 
     # Define variable
     datatype = 'cifar10'
-    modelpath = '../binary/checkpoints/cifar10_rf_256.pkl'
+    modelpath = '../binary/checkpoints/cifar10_mlp_100.pkl'
 
     print('------------- model -------------\n', modelpath)
 
     # Define which data sample to be processed
-    data_idx = 0
+    data_idx = 800
     print('---------------data point---------------\n', data_idx)
+
 
     # Load data
     x_train, x_test, y_train, y_test, input_shape = loadData(datatype)
@@ -63,10 +64,6 @@ def main():
     # Predict
     pred_y = model.predict(x_test)
 
-    print('pred_y[0:7]: ', pred_y[0], pred_y[1], pred_y[2], pred_y[3], pred_y[4], pred_y[5], pred_y[6])
-    print('y_test[0:7]: ', y_test[0], y_test[1], y_test[2], y_test[3], y_test[4], y_test[5], y_test[6])
-    print('\npred_y[-1:-7]: ', pred_y[-1], pred_y[-2], pred_y[-3], pred_y[-4], pred_y[-5], pred_y[-6])
-    print('y_test[-1:-7]: ', y_test[-1], y_test[-2], y_test[-3], y_test[-4], y_test[-5], y_test[-6])
     print('pred_y[{}]: '.format(data_idx), pred_y[data_idx])
     print('y_test[{}]: '.format(data_idx), y_test[data_idx])
     print('Accuracy: ', accuracy_score(y_true=y_test, y_pred=pred_y))
