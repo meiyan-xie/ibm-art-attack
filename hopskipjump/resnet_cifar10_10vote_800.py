@@ -7,7 +7,7 @@ from sklearn.metrics import accuracy_score
 from art.attacks.evasion import HopSkipJump
 from art.classifiers import BlackBoxClassifier
 
-import hopskipjump_resnet100votes as hopskipjump
+import hopskipjump
 import utils
 
 sys.path.append('..')
