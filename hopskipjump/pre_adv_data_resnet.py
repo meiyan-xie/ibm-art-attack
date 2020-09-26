@@ -13,13 +13,13 @@ def main():
     misclassified_rate_lst = []
 
     # Define variable
-    # modelpath = '../binary/checkpoints/cifar10_resnet50_10.pkl'
+
     for group in range(10):
         print('\ngroup id ', group)
         modelpath = '../binary/checkpoints/cifar10_resnet50_10_{}.pkl'.format(group)
         print('\n------------- model -------------\n', modelpath)
 
-        adv_data = np.load('resnet_adv_data_6.npy')
+        adv_data = np.load('resnet_adv_data_5.npy')
         print('adv shape', adv_data.shape)
         adv_data = adv_data.reshape(-1, 3, 32, 32)
         print('adv shape', adv_data.shape)
@@ -37,10 +37,10 @@ def main():
             misclassified_count = 0
             pred_y = model.predict(adv_data, best_index=vote).astype(int)
 
-            # The true label is 1
+            # The true label is 0
             print('pred_y', pred_y)
             for idx in range(len(pred_y)):
-                if pred_y[idx] == 0:
+                if pred_y[idx] == 1:
                     misclassified_count += 1
 
             print('Vote {} misclassified count is {}\n'.format(vote, misclassified_count))
