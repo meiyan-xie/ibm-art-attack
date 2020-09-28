@@ -21,7 +21,7 @@ def main():
     # model = BNN(['../binary/checkpoints/cifar10_mlpbnn_approx_%d.h5' % (i) for i in range(100)])
     # print('------------- model -------------\n', 'cifar10_mlpbnn_approx')
 
-    adv_data = np.load('scdcemlp_bnn_adv_data_1000.npy')
+    adv_data = np.load('scdcemlp_bnn_adv_data_1500.npy')
     print('adv shape', adv_data.shape)
     # adv_data = adv_data.reshape(-1, 3, 32, 32)
     # print('adv shape', adv_data.shape)
