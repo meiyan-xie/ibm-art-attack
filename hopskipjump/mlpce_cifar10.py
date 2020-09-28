@@ -1,6 +1,7 @@
 import sys
 import pickle
 import time
+import math
 import numpy as np
 
 from sklearn.metrics import accuracy_score
@@ -51,7 +52,7 @@ def main():
 
 
     # Define which data sample to be processed
-    data_idx = 800
+    data_idx = 0
     print('---------------data point---------------\n', data_idx)
 
 
@@ -62,16 +63,16 @@ def main():
     with open(modelpath, 'rb') as f:
         model = pickle.load(f)
 
+    # m is the number of feature
+    m = 3*32*32
+    model.nfeatures = math.sqrt(m) / m
+    print('nfeatures: ', model.nfeatures)
+
     # Predict
     pred_y = model.predict(x_test, cuda=False).astype(int)
-    print('pred_y[0:7]: ', pred_y[0], pred_y[1], pred_y[2], pred_y[3], pred_y[4], pred_y[5], pred_y[6])
-    print('y_test[0:7]: ', y_test[0], y_test[1], y_test[2], y_test[3], y_test[4], y_test[5], y_test[6])
-    print('\npred_y[-1:-7]: ', pred_y[-1], pred_y[-2], pred_y[-3], pred_y[-4], pred_y[-5], pred_y[-6])
-    print('y_test[-1:-7]: ', y_test[-1], y_test[-2], y_test[-3], y_test[-4], y_test[-5], y_test[-6])
     print('pred_y[{}]: '.format(data_idx), pred_y[data_idx])
     print('y_test[{}]: '.format(data_idx), y_test[data_idx])
     print('Accuracy: ', accuracy_score(y_true=y_test, y_pred=pred_y))
-
 
     # Create a model wrapper
     predictWrapper = modelWrapper(model)

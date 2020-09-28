@@ -1,6 +1,7 @@
 import sys
 import pickle
 import time
+import math
 import numpy as np
 
 from sklearn.metrics import accuracy_score
@@ -51,16 +52,21 @@ def main():
 
 
     # Define which data sample to be processed
-    data_idx = 1800
+    data_idx = 0
     print('---------------data point---------------\n', data_idx)
-
 
     # Load data
     x_train, x_test, y_train, y_test, input_shape = loadData(datatype)
 
+
     # Load model
     with open(modelpath, 'rb') as f:
         model = pickle.load(f)
+
+    # m is the number of feature
+    m = 3*32*32
+    model.nfeatures = math.sqrt(m) / m
+    print('nfeatures: ', model.nfeatures)
 
     # Predict
     pred_y = model.predict(x_test, cuda=False).astype(int)
