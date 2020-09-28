@@ -54,13 +54,13 @@ def main():
 
     # Define variable
     datatype = 'cifar10'
-    group = 9
+    group = 0
     modelpath = '../binary/checkpoints/cifar10_resnet50_10_{}.pkl'.format(group)
 
     print('------------- model -------------\n', modelpath)
 
     # Define which data sample to be processed
-    data_idx = 6
+    data_idx = 1000
     print('---------------data point---------------\n', data_idx)
 
     # Load data
@@ -97,7 +97,7 @@ def main():
     print('shape', adv.shape)
     adv = np.squeeze(adv, axis=1)
     print('shape', adv.shape)
-    np.save('resnet_adv_data_6/resnet_adv_data_{}'.format(group), adv)
+    np.save('resnet_adv_data_1000/resnet_adv_data_{}'.format(group), adv)
 
 
 main()

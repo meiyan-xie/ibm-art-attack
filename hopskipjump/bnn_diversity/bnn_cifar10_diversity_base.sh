@@ -3,8 +3,8 @@
 
 # Set a job name
 #SBATCH --job-name=bnn_diversity
-#SBATCH --output=bnn_diversity_out_5/bnn_vote_{}.out
-#SBATCH --error=bnn_diversity_out_5/bnn_vote_{}.err
+#SBATCH --output=bnn_diversity_out_1000/bnn_vote_{}.out
+#SBATCH --error=bnn_diversity_out_1000/bnn_vote_{}.err
 # Default in slurm
 
 # Specify GPU queue

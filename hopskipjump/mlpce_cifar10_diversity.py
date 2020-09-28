@@ -52,7 +52,7 @@ def main():
 
 
     # Define which data sample to be processed
-    data_idx = 5
+    data_idx = 1000
     print('---------------data point---------------\n', data_idx)
 
 
@@ -87,7 +87,7 @@ def main():
     print('shape', adv.shape)
     adv = np.squeeze(adv, axis=1)
     print('shape', adv.shape)
-    np.save('scdcemlp_adv_data_5', adv)
+    np.save('scdcemlp_adv_data_1000', adv)
 
 
 main()

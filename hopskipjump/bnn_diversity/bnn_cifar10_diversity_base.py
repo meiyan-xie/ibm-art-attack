@@ -52,7 +52,7 @@ def main():
     print('------------- model -------------\n', 'cifar10_mlpbnn_approx')
 
     # Define which data sample to be processed
-    data_idx = 5
+    data_idx = 1000
     print('---------------data point---------------\n', data_idx)
 
     # Load data
@@ -74,7 +74,7 @@ def main():
 
     print('adv_data predict: ', model.predict(adv_data, best_index=vote))
 
-    np.save('bnn_adv_data_5/bnn_adv_data_{}', adv_data)
+    np.save('bnn_adv_data_1000/bnn_adv_data_{}', adv_data)
 
 
 main()

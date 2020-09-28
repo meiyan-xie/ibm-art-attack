@@ -52,7 +52,7 @@ def main():
     print('------------- model -------------\n', modelpath)
 
     # Define which data sample to be processed
-    data_idx = 5
+    data_idx = 1000
     print('---------------data point---------------\n', data_idx)
 
     # Load data
@@ -87,6 +87,6 @@ def main():
     print('shape', adv.shape)
     adv = np.squeeze(adv, axis=1)
     print('shape', adv.shape)
-    np.save('rf_adv_data_5', adv)
+    np.save('rf_adv_data_1000', adv)
 
 main()
